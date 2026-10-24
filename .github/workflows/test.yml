@@ -15,7 +15,7 @@ jobs:
   job-3:
     runs-on: ubuntu-24.04
     needs:
-      - job-1
+      # - job-1
       - job-2
     steps:
       - run: echo "Hello from Job 3"
@@ -23,7 +23,7 @@ jobs:
   job-4:
     runs-on: ubuntu-24.04
     needs:
-      - job-2
+      - job-1
       - job-3
     steps:
       - run: echo "Hello from Job 4"
