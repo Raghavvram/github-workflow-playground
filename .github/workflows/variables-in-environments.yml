@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-24.04
     environment: dev
     steps:
-      - run: echo ${{var.TEST_VAR}}
+      - run: echo ${{vars.TEST_VAR}}
 
   accessing-from-env-prod:
     runs-on: ubuntu-24.04
     environment: prod
     steps:
-      - run: echo ${{var.TEST_VAR}}
+      - run: echo ${{vars.TEST_VAR}}
