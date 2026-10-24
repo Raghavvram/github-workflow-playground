@@ -16,3 +16,8 @@ jobs:
     environment: prod
     steps:
       - run: echo ${{vars.TEST_VAR}}
+
+  accessing-from-env-global:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo ${{vars.TEST_VAR}}
