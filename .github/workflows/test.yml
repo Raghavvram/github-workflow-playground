@@ -26,4 +26,4 @@ jobs:
       - job-2
       - job-3
     steps:
-      - rub: echo "Hello from Job 4"
+      - run: echo "Hello from Job 4"
