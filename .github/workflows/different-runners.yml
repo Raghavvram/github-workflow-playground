@@ -1,16 +1,18 @@
-name: different-runners
+name: Different Runners
 
 on:
   workflow_dispatch:
 
 jobs:
-  job-ubuntu:
+  ubuntu-runner:
+    name: Ubuntu 24.04 runner
     runs-on: ubuntu-24.04
     steps:
-      - run: cat /etc/os-release
+      - name: Show OS release
+        run: cat /etc/os-release
 
-  job-windows:
-    name: Windows 2022 VM
+  windows-runner:
+    name: Windows 2022 runner
     runs-on: windows-2022
     steps:
       - name: Show runner info
@@ -19,23 +21,23 @@ jobs:
           echo "Hello from ${{ runner.os }}-${{ runner.arch }}"
           echo "Runner name (type): ${{ runner.name }}"
 
-  job-mac:
-    name: macOS 14 VM
+  macos-runner:
+    name: macOS 14 runner
     runs-on: macos-14
     steps:
       - name: Show runner info
         run: |
-            echo "Hello from ${{ runner.os }}-${{ runner.arch }}"
-            echo "Runner name (type): ${{ runner.name }}"
+          echo "Hello from ${{ runner.os }}-${{ runner.arch }}"
+          echo "Runner name (type): ${{ runner.name }}"
 
-  alpine-container-on-github-hosted-ubuntu-vm:
-      name: Alpine container on Ubuntu VM
-      runs-on: ubuntu-24.04
-      container:
-        image: alpine:3.20
-      steps:
-        - name: Show runner info
-          run: |
-            echo "Hello from ${{ runner.os }}-${{ runner.arch }}"
-            echo "Runner name (type): ${{ runner.name }}"
-            echo "Container image:   $(grep PRETTY_NAME /etc/os-release)"
+  alpine-container:
+    name: Alpine container on Ubuntu runner
+    runs-on: ubuntu-24.04
+    container:
+      image: alpine:3.20
+    steps:
+      - name: Show runner info
+        run: |
+          echo "Hello from ${{ runner.os }}-${{ runner.arch }}"
+          echo "Runner name (type): ${{ runner.name }}"
+          echo "Container image:   $(grep PRETTY_NAME /etc/os-release)"

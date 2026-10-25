@@ -1,0 +1,43 @@
+name: "Job Dependencies: Fan-Out"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  root-job-1:
+    name: Root job 1
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello from root-job-1"
+
+  root-job-2:
+    name: Root job 2
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello from root-job-2"
+
+  chained-job:
+    name: Chained job (fan-out source)
+    runs-on: ubuntu-24.04
+    needs:
+      # - root-job-1
+      - root-job-2
+    steps:
+      - run: echo "Hello from chained-job"
+
+  join-job:
+    name: Join job
+    runs-on: ubuntu-24.04
+    needs:
+      - root-job-1
+      - chained-job
+    steps:
+      - run: echo "Hello from join-job"
+
+  downstream-job:
+    name: Downstream job
+    runs-on: ubuntu-24.04
+    needs:
+      - chained-job
+    steps:
+      - run: echo "Hello from downstream-job"

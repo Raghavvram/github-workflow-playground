@@ -1,23 +1,26 @@
-name: Environments in Variables
+name: Variables in Environments
 
 on:
   workflow_dispatch:
 
 jobs:
-
-  accessing-from-env-dev:
+  show-dev-environment-variable:
+    name: Show dev environment variable
     runs-on: ubuntu-24.04
     environment: dev
     steps:
-      - run: echo ${{vars.TEST_VAR}}
+      # TEST_VAR is defined in the repository/environment settings on GitHub.
+      - run: echo ${{ vars.TEST_VAR }}
 
-  accessing-from-env-prod:
+  show-prod-environment-variable:
+    name: Show prod environment variable
     runs-on: ubuntu-24.04
     environment: prod
     steps:
-      - run: echo ${{vars.TEST_VAR}}
+      - run: echo ${{ vars.TEST_VAR }}
 
-  accessing-from-env-global:
+  show-global-variable:
+    name: Show global variable
     runs-on: ubuntu-24.04
     steps:
-      - run: echo ${{vars.TEST_VAR}}
+      - run: echo ${{ vars.TEST_VAR }}

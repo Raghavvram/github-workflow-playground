@@ -1,0 +1,41 @@
+name: "Job Dependencies: Parallel Chains"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  root-job-1:
+    name: Root job 1
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello from root-job-1"
+
+  root-job-2:
+    name: Root job 2
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello from root-job-2"
+
+  first-chain-job:
+    name: First chain job
+    runs-on: ubuntu-24.04
+    needs:
+      - root-job-2
+    steps:
+      - run: echo "Hello from first-chain-job"
+
+  second-chain-job:
+    name: Second chain job
+    runs-on: ubuntu-24.04
+    needs:
+      - root-job-1
+    steps:
+      - run: echo "Hello from second-chain-job"
+
+  third-chain-job:
+    name: Third chain job
+    runs-on: ubuntu-24.04
+    needs:
+      - first-chain-job
+    steps:
+      - run: echo "Hello from third-chain-job"

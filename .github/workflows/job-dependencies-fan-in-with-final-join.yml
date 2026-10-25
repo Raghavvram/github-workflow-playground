@@ -1,0 +1,43 @@
+name: "Job Dependencies: Fan-In With Final Join"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  root-job-1:
+    name: Root job 1
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello from root-job-1"
+
+  root-job-2:
+    name: Root job 2
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello from root-job-2"
+
+  fan-in-job:
+    name: Fan-in job
+    runs-on: ubuntu-24.04
+    needs:
+      - root-job-1
+      - root-job-2
+    steps:
+      - run: echo "Hello from fan-in-job"
+
+  final-join-job:
+    name: Final join job
+    runs-on: ubuntu-24.04
+    needs:
+      - root-job-1
+      - downstream-job
+    steps:
+      - run: echo "Hello from final-join-job"
+
+  downstream-job:
+    name: Downstream job
+    runs-on: ubuntu-24.04
+    needs:
+      - fan-in-job
+    steps:
+      - run: echo "Hello from downstream-job"
